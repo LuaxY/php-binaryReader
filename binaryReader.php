@@ -33,6 +33,19 @@ class binaryReader
         $this->index = $_index;
     }
 
+    public function peekBool()
+    {
+        return (unpack('C', $this->data)[1] ? true : false);
+    }
+
+    public function readBool()
+    {
+        $byte = $this->peekBool();
+        $this->data = substr($this->data, 1);
+        $this->index += 1;
+        return $byte;
+    }
+
     public function peekByte()
     {
         return unpack('C', $this->data)[1];
